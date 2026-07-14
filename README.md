@@ -6,12 +6,15 @@
 
 See what's coming for your baby each week: developmental leaps, growth spurts, teething windows, and expected milestones — all on one scrollable timeline. No accounts, no tracking, works offline.
 
+### 🔗 [**Open the live app →**](https://weeksandleaps.netlify.app/)
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/290b464d-b050-4e2f-b0e3-47b7f4f0536e/deploy-status)](https://app.netlify.com/projects/weeksandleaps/deploys)
 [![PWA](https://img.shields.io/badge/PWA-installable-5E7A4E)](https://web.dev/progressive-web-apps/)
 [![No build](https://img.shields.io/badge/build-none-4C7186)](#tech)
 [![Languages](https://img.shields.io/badge/i18n-ES%20%7C%20EN-8C5F82)](#features)
 [![License: MIT](https://img.shields.io/badge/license-MIT-A9841F)](LICENSE)
 
-<img src="docs/screenshot-desktop.jpg" alt="Weeks & Leaps timeline showing weeks 10–19 with leaps, growth spurts and milestones" width="720">
+<a href="https://weeksandleaps.netlify.app/"><img src="docs/hero.svg" alt="Weeks & Leaps — your baby's growth ruler, week by week" width="760"></a>
 
 </div>
 
@@ -28,6 +31,8 @@ Enter your baby's birth date once and get a personalized "ruler" of their first 
 - 📍 **Today** — the week you're in right now, highlighted and auto-scrolled into view
 
 <div align="center">
+<img src="docs/screenshot-desktop.jpg" alt="Weeks & Leaps timeline showing weeks 10–19 with leaps, growth spurts and milestones" width="700">
+<br><br>
 <img src="docs/screenshot-mobile.jpg" alt="Mobile view of the timeline" width="260">
 &nbsp;&nbsp;
 <img src="docs/screenshot-legend.jpg" alt="Icon legend explaining each marker" width="380">
@@ -73,7 +78,9 @@ npx serve .
 
 ## Deploy
 
-It's a static site, so any static host works. To deploy on **Netlify** or **Vercel**: connect this repository, leave the build command empty, and set the publish directory to the repo root. HTTPS (required for the service worker) is provided automatically.
+The live site is hosted on **Netlify** at **[weeksandleaps.netlify.app](https://weeksandleaps.netlify.app/)** — every push to `main` auto-deploys ([deploy log](https://app.netlify.com/projects/weeksandleaps/deploys)).
+
+It's a static site, so any static host works: connect this repository, leave the build command empty, and set the publish directory to the repo root (see [`netlify.toml`](netlify.toml)). HTTPS (required for the service worker) is provided automatically.
 
 ## Privacy
 
@@ -89,7 +96,7 @@ These ranges are **general reference averages, not medical advice.** Every baby 
 - [x] Spanish / English toggle
 - [x] Installable PWA with offline support
 - [x] Compact, readable "ruler" redesign
-- [ ] Deploy to a public URL
+- [x] Deploy to a public URL — [weeksandleaps.netlify.app](https://weeksandleaps.netlify.app/)
 - [ ] Optional: multiple babies
 - [ ] Optional: custom domain
 
