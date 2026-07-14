@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <!-- Maskable variant: same mark scaled into the 80% safe zone -->
+  <rect width="512" height="512" fill="#EFF1E7"/>
+  <g transform="translate(51.2 51.2) scale(0.8)">
+    <rect x="136" y="56" width="240" height="400" rx="28" fill="#FBFAF6" stroke="#B7C2AC" stroke-width="6"/>
+    <rect x="196" y="92" width="8" height="328" rx="4" fill="#B7C2AC"/>
+    <rect x="176" y="104" width="48" height="10" rx="5" fill="#A9841F"/>
+    <rect x="184" y="152" width="32" height="8" rx="4" fill="#5E7A4E"/>
+    <rect x="184" y="196" width="32" height="8" rx="4" fill="#4C7186"/>
+    <rect x="176" y="232" width="164" height="52" rx="16" fill="#C05A3F"/>
+    <circle cx="202" cy="258" r="10" fill="#FBFAF6"/>
+    <rect x="224" y="250" width="96" height="16" rx="8" fill="#F6E2D9"/>
+    <rect x="184" y="312" width="32" height="8" rx="4" fill="#8C5F82"/>
+    <rect x="184" y="356" width="32" height="8" rx="4" fill="#B5721E"/>
+    <rect x="176" y="398" width="48" height="10" rx="5" fill="#A9841F"/>
+    <path d="M300 180 q44 -52 84 -40 q-8 46 -62 54 q-14 2 -22 -14 z" fill="#5E7A4E"/>
+    <path d="M300 182 q30 -22 58 -26" fill="none" stroke="#FBFAF6" stroke-width="5" stroke-linecap="round"/>
+  </g>
+</svg>

@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Weeks & Leaps — baby growth ruler, week by week</title>
+<meta name="description" content="A week-by-week baby growth ruler from birth to 24 months: developmental leaps, growth spurts, teething windows and milestones. Free, private, works offline. ES/EN.">
+<link rel="canonical" href="https://weeksandleaps.netlify.app/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Weeks & Leaps — baby growth ruler">
+<meta property="og:description" content="Enter your baby's birth date and get a personal week-by-week ruler of leaps, growth spurts, teething and milestones. No accounts, data never leaves your device.">
+<meta property="og:image" content="https://weeksandleaps.netlify.app/og-image.png">
+<meta property="og:url" content="https://weeksandleaps.netlify.app/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#E5E9DA">
+<link rel="icon" href="icons/icon-192.png" type="image/png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EFF1E7;
+    --paper-alt:#E5E9DA;
+    --paper-deep:#DDE2CE;
+    --ink:#212C24;
+    --ink-soft:#63715F;
+    --line:#B7C2AC;
+    --gold:#A9841F;
+    --gold-bg:#F2E9CE;
+    --teal:#4C7186;
+    --teal-bg:#DEE9EC;
+    --plum:#8C5F82;
+    --plum-bg:#EBE0E9;
+    --indigo:#565C96;
+    --indigo-bg:#E4E5F2;
+    --amber:#B5721E;
+    --amber-bg:#F3E3C8;
+    --sage:#5E7A4E;
+    --sage-bg:#E4EBDC;
+    --coral:#C05A3F;
+    --coral-bg:#F6E2D9;
+    --white:#FBFAF6;
+    --shadow-ambient:0 18px 40px -18px rgba(33,44,36,0.28);
+    --shadow-contact:0 2px 6px -1px rgba(33,44,36,0.14);
+    --shadow-lift:0 26px 50px -20px rgba(33,44,36,0.38), 0 4px 10px -2px rgba(33,44,36,0.18);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(1200px 700px at 50% -10%, rgba(251,250,246,0.85), rgba(251,250,246,0) 60%),
+      radial-gradient(900px 900px at 110% 110%, rgba(183,194,172,0.30), rgba(183,194,172,0) 55%),
+      var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;
+  }
+  /* paper grain over everything, very faint */
+  body::before{
+    content:'';
+    position:fixed; inset:0;
+    pointer-events:none; z-index:100;
+    opacity:0.05;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* ---------- header plaque: a hanging wooden sign ---------- */
+  .plaque{
+    position:sticky;
+    top:0;
+    z-index:5;
+    background:linear-gradient(180deg, #EBEEDF 0%, var(--paper-alt) 100%);
+    border-bottom:1px solid var(--line);
+    box-shadow:0 1px 0 rgba(251,250,246,0.9) inset, 0 6px 18px -12px rgba(33,44,36,0.25);
+    padding:calc(14px + env(safe-area-inset-top)) 16px 12px;
+    text-align:center;
+    transition:box-shadow .3s ease;
+  }
+  .plaque.scrolled{
+    box-shadow:0 1px 0 rgba(251,250,246,0.9) inset, 0 14px 28px -14px rgba(33,44,36,0.45);
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.66rem;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin-bottom:4px;
+  }
+  .plaque h1{
+    font-family:'Fraunces',serif;
+    font-weight:400;
+    font-style:italic;
+    font-size:0.98rem;
+    margin:0 0 10px;
+    color:var(--ink-soft);
+  }
+  .plaque h1 b{ font-style:normal; font-weight:600; color:var(--ink); }
+  .today-stat{
+    display:flex;
+    align-items:baseline;
+    justify-content:center;
+    gap:10px;
+  }
+  .today-big{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:2.7rem;
+    line-height:1;
+    color:var(--coral);
+    text-shadow:0 1px 0 rgba(251,250,246,0.8);
+  }
+  .today-label{ font-size:0.92rem; color:var(--ink-soft); }
+  .today-sub{
+    margin-top:5px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.76rem;
+    color:var(--ink-soft);
+  }
+  .plaque-tools{
+    margin-top:8px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:14px;
+    flex-wrap:wrap;
+  }
+  .lang-toggle{
+    display:inline-flex;
+    border:1px solid var(--line);
+    border-radius:999px;
+    overflow:hidden;
+    background:var(--white);
+    box-shadow:var(--shadow-contact), inset 0 1px 0 rgba(251,250,246,0.9);
+  }
+  .lang-toggle button{
+    appearance:none;
+    border:0;
+    background:transparent;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.72rem;
+    font-weight:600;
+    letter-spacing:0.08em;
+    color:var(--ink-soft);
+    padding:10px 16px;
+    min-height:40px;
+    cursor:pointer;
+  }
+  .lang-toggle button.active{
+    background:var(--ink);
+    color:var(--white);
+  }
+  .link-btn{
+    appearance:none;
+    border:0;
+    background:transparent;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.72rem;
+    color:var(--ink-soft);
+    text-decoration:underline;
+    text-underline-offset:3px;
+    cursor:pointer;
+    padding:10px 6px;
+    min-height:40px;
+  }
+  .link-btn:hover{ color:var(--ink); }
+
+  /* ---------- legend explainer ---------- */
+  .legend-panel{
+    max-width:560px;
+    margin:18px auto 6px;
+    padding:0 16px;
+  }
+  .legend-panel details{
+    background:var(--white);
+    border:1px solid var(--line);
+    border-radius:14px;
+    box-shadow:var(--shadow-contact), var(--shadow-ambient);
+    overflow:hidden;
+  }
+  .legend-panel summary{
+    list-style:none;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    padding:14px 18px;
+    min-height:48px;
+    font-family:'Fraunces',serif;
+    font-style:italic;
+    font-size:0.95rem;
+    color:var(--ink);
+    user-select:none;
+  }
+  .legend-panel summary::-webkit-details-marker{ display:none; }
+  .legend-panel summary .chev{
+    font-family:'IBM Plex Mono',monospace;
+    font-style:normal;
+    color:var(--ink-soft);
+    transition:transform .25s ease;
+  }
+  .legend-panel details[open] summary .chev{ transform:rotate(180deg); }
+  .legend-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:1px;
+    background:rgba(183,194,172,0.4);
+    border-top:1px solid rgba(183,194,172,0.4);
+  }
+  @media (min-width:640px){
+    .legend-grid{ grid-template-columns:1fr 1fr; }
+  }
+  .legend-item{
+    background:var(--white);
+    padding:12px 16px;
+    display:flex;
+    gap:12px;
+    align-items:flex-start;
+  }
+  .legend-item .glyph{
+    flex-shrink:0;
+    width:38px; height:38px;
+    border-radius:10px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.1rem;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,0.7), 0 1px 2px rgba(33,44,36,0.12);
+  }
+  .legend-item .txt{ font-size:0.78rem; line-height:1.45; color:var(--ink-soft); }
+  .legend-item .txt b{
+    display:block;
+    color:var(--ink);
+    font-weight:600;
+    font-size:0.8rem;
+    margin-bottom:1px;
+  }
+
+  /* ---------- the ruler: a raised paper strip ---------- */
+  .ruler-wrap{
+    max-width:600px;
+    margin:14px auto 0;
+    padding:0 12px 30px;
+    perspective:1200px;
+  }
+  .ruler-board{
+    position:relative;
+    background:linear-gradient(180deg, var(--white) 0%, #F6F5EE 100%);
+    border:1px solid var(--line);
+    border-radius:18px;
+    box-shadow:var(--shadow-contact), var(--shadow-ambient),
+      inset 0 1px 0 rgba(255,255,255,0.9);
+    padding:16px 14px 22px 64px;
+  }
+  /* two "nail holes" at the top of the board */
+  .ruler-board::before, .ruler-board::after{
+    content:'';
+    position:absolute;
+    top:12px;
+    width:9px; height:9px;
+    border-radius:50%;
+    background:var(--paper-deep);
+    box-shadow:inset 0 1.5px 2.5px rgba(33,44,36,0.35), 0 1px 0 rgba(255,255,255,0.8);
+  }
+  .ruler-board::before{ left:22px; }
+  .ruler-board::after{ right:22px; }
+  .spine{
+    position:absolute;
+    left:46px;
+    top:30px;
+    bottom:24px;
+    width:2px;
+    background:linear-gradient(180deg, var(--line), var(--line));
+    box-shadow:1px 0 0 rgba(255,255,255,0.7);
+  }
+  .row{
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    gap:3px;
+    padding:9px 4px;
+    border-bottom:1px solid rgba(183,194,172,0.35);
+    border-radius:8px;
+    transform-origin:left center;
+    transition:transform .18s ease, box-shadow .18s ease, background-color .18s ease;
+  }
+  .row-main{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+  .row .tick{
+    position:absolute;
+    left:-24px;
+    top:18px;
+    width:16px;
+    height:2px;
+    background:var(--line);
+  }
+  .row.milestone .tick{ background:var(--sage); }
+  .row.teething .tick{ background:var(--amber); }
+  .row.fussy .tick{ background:var(--indigo); }
+  .row.fussy{ background:rgba(86,92,150,0.06); }
+  .row.spurt .tick{ background:var(--plum); }
+  .row.spurt{ background:rgba(140,95,130,0.07); }
+  .row.leap .tick{ background:var(--teal); }
+  .row.month .tick{ width:24px; height:3px; background:var(--gold); left:-32px; }
+  .row.month{ background:rgba(169,132,31,0.06); }
+  .note-line{
+    font-size:0.68rem;
+    font-style:italic;
+    padding-left:2px;
+    line-height:1.4;
+  }
+  .note-line.spurt{ color:var(--plum); }
+  .note-line.fussy{ color:var(--indigo); }
+  .note-line.teething{ color:var(--amber); }
+  .note-line.milestone{ color:var(--sage); }
+  .weeknum{
+    font-family:'IBM Plex Mono',monospace;
+    font-weight:600;
+    font-size:0.8rem;
+    width:58px;
+    flex-shrink:0;
+    color:var(--ink);
+  }
+  .weeknum small{ display:block; font-weight:400; color:var(--ink-soft); font-size:0.66rem; }
+  .date{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.73rem;
+    color:var(--ink-soft);
+    width:82px;
+    flex-shrink:0;
+  }
+  .age{
+    font-size:0.8rem;
+    color:var(--ink);
+    flex-shrink:0;
+  }
+  .badges{ display:flex; gap:6px; flex-wrap:wrap; flex:1; min-width:0; justify-content:flex-end; }
+  .badge{
+    font-size:0.65rem;
+    font-family:'Inter',sans-serif;
+    font-weight:600;
+    padding:3px 8px;
+    border-radius:20px;
+    white-space:nowrap;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,0.55), 0 1px 2px rgba(33,44,36,0.10);
+  }
+  .badge.month{ background:var(--gold-bg); color:var(--gold); }
+  .badge.leap{ background:var(--teal-bg); color:var(--teal); }
+  .badge.spurt{ background:var(--plum-bg); color:var(--plum); }
+  .badge.fussy{ background:var(--indigo-bg); color:var(--indigo); }
+  .badge.teething{ background:var(--amber-bg); color:var(--amber); }
+  .badge.milestone{ background:var(--sage-bg); color:var(--sage); }
+  .badge.birth{ background:var(--coral-bg); color:var(--coral); }
+  .badge.today{ background:var(--coral); color:var(--white); box-shadow:0 2px 6px -1px rgba(192,90,63,0.55); }
+
+  /* the "today" card pops toward the viewer */
+  .row.today{
+    background:linear-gradient(180deg, #F9E7DE 0%, var(--coral-bg) 100%);
+    border:1px solid rgba(192,90,63,0.35);
+    border-radius:12px;
+    margin:6px -8px;
+    padding:12px 12px;
+    scroll-margin-top:170px;
+    box-shadow:var(--shadow-lift), inset 0 1px 0 rgba(255,255,255,0.8);
+    transform:translateZ(30px) scale(1.015);
+    z-index:2;
+  }
+  .row.today .tick{ background:var(--coral); width:28px; left:-32px; height:3px; }
+  .row.today .weeknum{ color:var(--coral); }
+
+  /* hover tilt on capable devices */
+  @media (hover:hover) and (prefers-reduced-motion: no-preference){
+    .row:not(.today):hover{
+      transform:rotateX(2.2deg) translateY(-1px) translateZ(6px);
+      background-color:rgba(251,250,246,0.9);
+      box-shadow:0 10px 22px -14px rgba(33,44,36,0.35);
+      z-index:1;
+    }
+  }
+  @media (prefers-reduced-motion: no-preference){
+    .row:active{ transform:scale(0.995); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    .row, .setup-card, .legend-panel summary .chev{ transition:none; animation:none; }
+    .row.today{ transform:none; }
+  }
+
+  /* ---------- footer ---------- */
+  footer{
+    max-width:600px;
+    margin:6px auto 0;
+    padding:10px 20px calc(40px + env(safe-area-inset-bottom));
+    text-align:center;
+  }
+  footer .foot-block{
+    font-size:0.7rem;
+    color:var(--ink-soft);
+    line-height:1.55;
+    margin:0 0 12px;
+  }
+  footer .foot-block b{ color:var(--ink); font-weight:600; }
+  footer details{
+    text-align:left;
+    max-width:460px;
+    margin:0 auto 14px;
+    font-size:0.72rem;
+    color:var(--ink-soft);
+    line-height:1.55;
+  }
+  footer details summary{
+    cursor:pointer;
+    text-align:center;
+    font-family:'Fraunces',serif;
+    font-style:italic;
+    font-size:0.85rem;
+    color:var(--ink);
+    padding:8px;
+    min-height:40px;
+  }
+  .foot-mark{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.66rem;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    opacity:0.8;
+  }
+
+  /* ---------- setup screen ---------- */
+  .setup{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:24px 16px;
+    perspective:900px;
+  }
+  .setup-card{
+    background:linear-gradient(180deg, var(--white) 0%, #F5F4EC 100%);
+    border:1px solid var(--line);
+    border-radius:20px;
+    box-shadow:var(--shadow-lift), inset 0 1px 0 rgba(255,255,255,0.9);
+    padding:34px 28px 30px;
+    max-width:400px;
+    width:100%;
+    text-align:center;
+    animation:cardIn .55s cubic-bezier(.2,.7,.3,1) both;
+  }
+  @keyframes cardIn{
+    from{ opacity:0; transform:translateY(26px) rotateX(7deg); }
+    to{ opacity:1; transform:translateY(0) rotateX(0); }
+  }
+  .setup-card .eyebrow{ margin-bottom:8px; }
+  .setup-card h2{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:1.45rem;
+    margin:0 0 8px;
+  }
+  .setup-card p{
+    font-size:0.8rem;
+    color:var(--ink-soft);
+    line-height:1.5;
+    margin:0 0 20px;
+  }
+  .setup-card input[type="date"]{
+    width:100%;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:1rem;
+    color:var(--ink);
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:13px 14px;
+    min-height:48px;
+    box-shadow:inset 0 2px 4px rgba(33,44,36,0.08);
+  }
+  .setup-card .err{
+    display:none;
+    color:var(--coral);
+    font-size:0.75rem;
+    margin:10px 0 0;
+    line-height:1.4;
+  }
+  .setup-card .err.show{ display:block; }
+  .setup-card .go{
+    appearance:none;
+    width:100%;
+    margin-top:18px;
+    border:0;
+    border-radius:12px;
+    background:var(--ink);
+    color:var(--white);
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:1rem;
+    padding:14px;
+    min-height:48px;
+    cursor:pointer;
+    box-shadow:0 8px 18px -8px rgba(33,44,36,0.5), inset 0 1px 0 rgba(255,255,255,0.15);
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  @media (prefers-reduced-motion: no-preference){
+    .setup-card .go:hover{ transform:translateY(-1px); box-shadow:0 12px 24px -10px rgba(33,44,36,0.55), inset 0 1px 0 rgba(255,255,255,0.15); }
+    .setup-card .go:active{ transform:translateY(1px) scale(0.99); }
+  }
+  .setup-card .setup-lang{ margin-top:18px; display:flex; justify-content:center; }
+  .setup-card .cancel{ margin-top:8px; }
+
+  .hidden{ display:none !important; }
+
+  /* very small screens: tighten the board */
+  @media (max-width:420px){
+    .ruler-board{ padding-left:56px; border-radius:14px; }
+    .spine{ left:40px; }
+    .date{ width:72px; }
+    .age{ display:none; }  /* age is redundant with weeknum+sub on tiny screens */
+    .badges{ justify-content:flex-start; width:100%; padding-left:0; }
+    .badge{ white-space:normal; line-height:1.35; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ SETUP ============ -->
+<section class="setup hidden" id="setup" aria-labelledby="setupTitle">
+  <div class="setup-card">
+    <div class="eyebrow">Weeks &amp; Leaps</div>
+    <h2 id="setupTitle" data-i18n="setupTitle"></h2>
+    <p data-i18n="setupHint"></p>
+    <input type="date" id="birthInput" aria-describedby="setupErr">
+    <p class="err" id="setupErr" role="alert"></p>
+    <button class="go" id="setupGo" data-i18n="setupBtn"></button>
+    <div class="setup-lang">
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button type="button" data-lang="es">ES</button>
+        <button type="button" data-lang="en">EN</button>
+      </div>
+    </div>
+    <button class="link-btn cancel hidden" id="setupCancel" data-i18n="cancel"></button>
+  </div>
+</section>
+
+<!-- ============ APP ============ -->
+<div id="app" class="hidden">
+  <header class="plaque" id="plaque">
+    <div class="eyebrow" data-i18n="eyebrow"></div>
+    <h1><span data-i18n="bornOn"></span> <b id="birthDateLabel"></b></h1>
+    <div class="today-stat">
+      <span class="today-big" id="todayWeeks"></span>
+      <span class="today-label" data-i18n="weeksToday"></span>
+    </div>
+    <div class="today-sub" id="todaySub"></div>
+    <div class="plaque-tools">
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button type="button" data-lang="es">ES</button>
+        <button type="button" data-lang="en">EN</button>
+      </div>
+      <button class="link-btn" id="changeDate" data-i18n="changeDate"></button>
+    </div>
+  </header>
+
+  <div class="legend-panel">
+    <details id="legendDetails">
+      <summary><span data-i18n="legendTitle"></span><span class="chev">▾</span></summary>
+      <div class="legend-grid" id="legendGrid"></div>
+    </details>
+  </div>
+
+  <main class="ruler-wrap">
+    <div class="ruler-board">
+      <div class="spine"></div>
+      <div id="ruler"></div>
+    </div>
+  </main>
+
+  <footer>
+    <details>
+      <summary data-i18n="aboutTitle"></summary>
+      <p data-i18n="aboutBody"></p>
+    </details>
+    <p class="foot-block"><b data-i18n="disclaimerLead"></b> <span data-i18n="disclaimerBody"></span></p>
+    <p class="foot-block" data-i18n="privacyBody"></p>
+    <p class="foot-mark">Weeks &amp; Leaps</p>
+  </footer>
+</div>
+
+<script>
+'use strict';
+
+/* ================= i18n ================= */
+const I18N = {
+  es: {
+    locale:'es-ES',
+    eyebrow:'Semanas y Saltos · regla de crecimiento',
+    bornOn:'Nació el',
+    weeksToday:'semanas hoy',
+    todaySub:(m,w,d)=>`≈ ${m} ${m===1?'mes':'meses'} y ${w} semana${w===1?'':'s'} · día ${d} de vida`,
+    week:'Sem.',
+    ageRow:(m,w)=>`${m} m ${w} s`,
+    changeDate:'cambiar fecha',
+    cancel:'volver sin cambiar',
+    setupTitle:'¿Cuándo nació tu bebé?',
+    setupHint:'La línea de tiempo se ajusta a su fecha de nacimiento, semana a semana, desde el nacimiento hasta los 2 años. Todo se guarda solo en este dispositivo.',
+    setupBtn:'Crear la regla',
+    errEmpty:'Elige una fecha para empezar.',
+    errFuture:'Esa fecha está en el futuro — todavía no ha nacido 🙂',
+    errTooOld:'La regla cubre los primeros 24 meses; esa fecha queda fuera del rango.',
+    badgeBirth:'🎉 nacimiento',
+    badgeMonth:(m)=>`🎂 ${m} ${m===1?'mes':'meses'}`,
+    badgeLeap:'🧠 salto',
+    badgeToday:'📍 hoy',
+    legendTitle:'¿Qué significa cada icono?',
+    legend:[
+      { icon:'🎂', cls:'month', name:'Cumple mensual', desc:'Un mes más de vida — las marcas doradas de la regla.' },
+      { icon:'🧠', cls:'leap',  name:'Salto de desarrollo', desc:'Salto mental (Wonder Weeks): días más demandantes y, después, habilidades nuevas.' },
+      { icon:'🍼', cls:'spurt', name:'Brote de crecimiento', desc:'Pide comer más seguido, duerme más y está más irritable durante unos días.' },
+      { icon:'😭', cls:'fussy', name:'Pico de llanto', desc:'El "periodo púrpura": época de más llanto, a veces sin causa clara. Es normal y pasa.' },
+      { icon:'🦷', cls:'teething', name:'Dentición', desc:'Ventana típica de dientes nuevos: babeo, encías inflamadas, todo a la boca.' },
+      { icon:'🌱', cls:'milestone', name:'Hito esperado', desc:'Rango típico en el que puede aparecer una habilidad nueva (sonreír, sentarse, caminar…).' },
+      { icon:'📍', cls:'today', name:'Hoy', desc:'La semana en la que están ahora mismo.' },
+    ],
+    aboutTitle:'¿Por qué existe esta página?',
+    aboutBody:'La hice siendo papá primerizo: quería ver de un vistazo, en una sola regla, qué le tocaba a mi bebé cada semana — saltos, brotes, dientes, hitos — sin apps con cuentas ni suscripciones. Espero que a tu familia también le sirva.',
+    disclaimerLead:'Aviso:',
+    disclaimerBody:'los rangos son promedios generales de referencia, no consejo médico. Cada bebé varía bastante, sobre todo en dentición y en hitos motores. Ante cualquier duda, consulta a tu pediatra.',
+    privacyBody:'Privacidad: la fecha de nacimiento se guarda solo en tu dispositivo. No hay cuentas, ni servidores, ni rastreo.',
+  },
+  en: {
+    locale:'en-US',
+    eyebrow:'Weeks & Leaps · growth ruler',
+    bornOn:'Born on',
+    weeksToday:'weeks old today',
+    todaySub:(m,w,d)=>`≈ ${m} month${m===1?'':'s'} and ${w} week${w===1?'':'s'} · day ${d} of life`,
+    week:'Wk.',
+    ageRow:(m,w)=>`${m} m ${w} w`,
+    changeDate:'change date',
+    cancel:'go back without changing',
+    setupTitle:'When was your baby born?',
+    setupHint:'The timeline adapts to their birth date, week by week, from birth to age 2. Everything is stored on this device only.',
+    setupBtn:'Build the ruler',
+    errEmpty:'Pick a date to get started.',
+    errFuture:'That date is in the future — they haven’t arrived yet 🙂',
+    errTooOld:'The ruler covers the first 24 months; that date is out of range.',
+    badgeBirth:'🎉 birth',
+    badgeMonth:(m)=>`🎂 ${m} month${m===1?'':'s'}`,
+    badgeLeap:'🧠 leap',
+    badgeToday:'📍 today',
+    legendTitle:'What does each icon mean?',
+    legend:[
+      { icon:'🎂', cls:'month', name:'Monthly birthday', desc:'One more month of life — the gold marks on the ruler.' },
+      { icon:'🧠', cls:'leap',  name:'Developmental leap', desc:'A mental leap (Wonder Weeks): clingier, fussier days followed by brand-new skills.' },
+      { icon:'🍼', cls:'spurt', name:'Growth spurt', desc:'Feeds more often, sleeps more, and is fussier for a few days.' },
+      { icon:'😭', cls:'fussy', name:'Crying peak', desc:'The "purple period": weeks of extra crying, sometimes with no clear cause. Normal, and it passes.' },
+      { icon:'🦷', cls:'teething', name:'Teething', desc:'Typical window for new teeth: extra drool, sore gums, everything goes in the mouth.' },
+      { icon:'🌱', cls:'milestone', name:'Expected milestone', desc:'The typical range when a new skill may appear (smiling, sitting, walking…).' },
+      { icon:'📍', cls:'today', name:'Today', desc:'The week you’re in right now.' },
+    ],
+    aboutTitle:'Why does this page exist?',
+    aboutBody:'I built it as a first-time dad: I wanted one ruler that shows, at a glance, what’s coming for my baby each week — leaps, spurts, teeth, milestones — without account-based apps or subscriptions. I hope it helps your family too.',
+    disclaimerLead:'Note:',
+    disclaimerBody:'these ranges are general reference averages, not medical advice. Every baby varies a lot, especially with teething and motor milestones. If in doubt, talk to your pediatrician.',
+    privacyBody:'Privacy: the birth date is stored on your device only. No accounts, no servers, no tracking.',
+  }
+};
+
+/* ================= data ================= */
+const LEAP_WEEKS = [5, 8, 12, 19, 26, 37, 46, 55, 64, 75]; // Wonder Weeks mental leaps
+const DAY = 86400000;
+const MAX_MONTHS = 24;
+
+const CATEGORIES = [
+  {
+    key:'spurt', icon:'🍼', alwaysNote:true,
+    badgeLabel:(r,L)=>`${L==='es'?'brote':'spurt'} (${r.label[L]})`,
+    noteText:(r,L)=> L==='es'
+      ? `😣 brote de crecimiento (${r.label.es}): más irritable, pide comer más seguido, duerme más — puede durar varios días`
+      : `😣 growth spurt (${r.label.en}): fussier, feeds more often, sleeps more — can last several days`,
+    ranges:[
+      { label:{es:'7–10 días', en:'7–10 days'},     start:1,  end:1  },
+      { label:{es:'2–3 semanas', en:'2–3 weeks'},   start:2,  end:3  },
+      { label:{es:'4–6 semanas', en:'4–6 weeks'},   start:4,  end:6  },
+      { label:{es:'3 meses', en:'3 months'},        start:12, end:13 },
+      { label:{es:'6 meses', en:'6 months'},        start:25, end:26 },
+      { label:{es:'9 meses', en:'9 months'},        start:38, end:39 },
+    ]
+  },
+  {
+    key:'fussy', icon:'😭', alwaysNote:true,
+    badgeLabel:(r,L)=> L==='es'?'pico de llanto':'crying peak',
+    noteText:(r,L)=> L==='es'
+      ? '😭 "periodo púrpura": época de más llanto/cólico, a veces sin causa clara — es normal y suele calmarse hacia las 12–16 semanas'
+      : '😭 the "purple period": extra crying/colic, sometimes with no clear cause — it’s normal and usually eases by weeks 12–16',
+    ranges:[
+      { label:{es:'pico de llanto', en:'crying peak'}, start:2, end:8 },
+    ]
+  },
+  {
+    key:'teething', icon:'🦷', alwaysNote:false,
+    badgeLabel:(r,L)=>`${L==='es'?'dentición':'teething'} (${r.label[L]})`,
+    noteText:(r,L)=> L==='es'
+      ? `🦷 dentición — ${r.label.es}: babeo extra, se lleva las manos/objetos a la boca, encías inflamadas (varía mucho, puede adelantarse o atrasarse meses)`
+      : `🦷 teething — ${r.label.en}: extra drooling, hands/objects in the mouth, sore gums (varies a lot — can run months early or late)`,
+    ranges:[
+      { label:{es:'primeros dientes', en:'first teeth'},           start:20, end:30 },
+      { label:{es:'incisivos superiores', en:'upper incisors'},    start:30, end:44 },
+      { label:{es:'muelas y colmillos', en:'molars & canines'},    start:56, end:90 },
+    ]
+  },
+  {
+    key:'milestone', icon:'🌱', alwaysNote:false,
+    badgeLabel:(r,L)=>r.label[L],
+    noteText:(r,L)=> L==='es' ? `🌱 puede empezar a: ${r.label.es}` : `🌱 may start to: ${r.label.en}`,
+    ranges:[
+      { label:{es:'primera sonrisa social', en:'first social smile'},          start:6,  end:8  },
+      { label:{es:'sostiene cabeza firme, se ríe', en:'steady head, laughs'},  start:12, end:16 },
+      { label:{es:'se voltea', en:'rolls over'},                               start:16, end:22 },
+      { label:{es:'se sienta sin apoyo', en:'sits unassisted'},                start:24, end:30 },
+      { label:{es:'gatea', en:'crawls'},                                       start:32, end:42 },
+      { label:{es:'se para con apoyo', en:'pulls to stand'},                   start:40, end:50 },
+      { label:{es:'primeras palabras', en:'first words'},                      start:48, end:60 },
+      { label:{es:'primeros pasos', en:'first steps'},                         start:52, end:68 },
+    ]
+  },
+];
+
+/* ================= state ================= */
+const STORE_KEY = 'weeksandleaps.v1';
+
+function loadConfig(){
+  try{
+    const raw = localStorage.getItem(STORE_KEY);
+    if(!raw) return null;
+    const cfg = JSON.parse(raw);
+    if(!cfg || !/^\d{4}-\d{2}-\d{2}$/.test(cfg.birthDate || '')) return null;
+    if(cfg.lang !== 'es' && cfg.lang !== 'en') cfg.lang = defaultLang();
+    return cfg;
+  }catch(e){ return null; }
+}
+function saveConfig(cfg){
+  try{ localStorage.setItem(STORE_KEY, JSON.stringify(cfg)); }catch(e){}
+}
+function defaultLang(){
+  return (navigator.language || 'en').toLowerCase().startsWith('es') ? 'es' : 'en';
+}
+/* parse YYYY-MM-DD as local noon to dodge timezone off-by-one */
+function parseBirth(s){
+  const [y,m,d] = s.split('-').map(Number);
+  return new Date(y, m-1, d, 12, 0, 0);
+}
+
+let config = loadConfig();
+let lang = config ? config.lang : defaultLang();
+
+/* ================= helpers ================= */
+function monthsAndWeeks(from, to){
+  let months = (to.getFullYear() - from.getFullYear()) * 12 + (to.getMonth() - from.getMonth());
+  let anniversary = new Date(from);
+  anniversary.setMonth(anniversary.getMonth() + months);
+  if (anniversary > to) {
+    months--;
+    anniversary = new Date(from);
+    anniversary.setMonth(anniversary.getMonth() + months);
+  }
+  const weeks = Math.floor((to - anniversary) / (7 * DAY));
+  return { months, weeks };
+}
+
+function applyStaticStrings(){
+  const T = I18N[lang];
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const v = T[el.dataset.i18n];
+    if (typeof v === 'string') el.textContent = v;
+  });
+  document.querySelectorAll('.lang-toggle button').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.lang === lang);
+  });
+}
+
+/* ================= legend ================= */
+function renderLegend(){
+  const T = I18N[lang];
+  const grid = document.getElementById('legendGrid');
+  grid.innerHTML = '';
+  T.legend.forEach(item => {
+    const div = document.createElement('div');
+    div.className = 'legend-item';
+    const glyph = document.createElement('span');
+    glyph.className = 'glyph';
+    glyph.style.background = `var(--${item.cls === 'today' ? 'coral' : item.cls}-bg, var(--coral-bg))`;
+    if (item.cls === 'today') glyph.style.background = 'var(--coral-bg)';
+    glyph.textContent = item.icon;
+    const txt = document.createElement('span');
+    txt.className = 'txt';
+    const b = document.createElement('b');
+    b.textContent = item.name;
+    txt.appendChild(b);
+    txt.appendChild(document.createTextNode(item.desc));
+    div.appendChild(glyph);
+    div.appendChild(txt);
+    grid.appendChild(div);
+  });
+}
+
+/* ================= ruler ================= */
+function renderRuler(){
+  const T = I18N[lang];
+  const BIRTH = parseBirth(config.birthDate);
+  const today = new Date();
+  const daysSinceBirth = Math.floor((today - BIRTH) / DAY);
+  const currentWeekIndex = Math.max(0, Math.floor(daysSinceBirth / 7));
+
+  document.getElementById('birthDateLabel').textContent =
+    BIRTH.toLocaleDateString(T.locale, { day:'numeric', month:'long', year:'numeric' });
+
+  const todayMw = monthsAndWeeks(BIRTH, today);
+  document.getElementById('todayWeeks').textContent = currentWeekIndex;
+  document.getElementById('todaySub').textContent =
+    T.todaySub(Math.max(0, todayMw.months), Math.max(0, todayMw.weeks), Math.max(0, daysSinceBirth));
+
+  const ruler = document.getElementById('ruler');
+  ruler.innerHTML = '';
+
+  const rows = [];
+  let i = 0;
+  while (true) {
+    const rowDate = new Date(BIRTH);
+    rowDate.setDate(rowDate.getDate() + 7 * i);
+    const mw = monthsAndWeeks(BIRTH, rowDate);
+    rows.push({ i, rowDate, mw });
+    if (mw.months >= MAX_MONTHS || i > 110) break;
+    i++;
+  }
+
+  rows.forEach(({ i, rowDate, mw }) => {
+    const isMonth = mw.weeks === 0;
+    const isLeap = LEAP_WEEKS.includes(i);
+    const isToday = i === currentWeekIndex;
+    const isBirth = i === 0;
+
+    const matches = CATEGORIES.map(cat => {
+      const range = cat.ranges.find(r => i >= r.start && i <= r.end);
+      return range ? { cat, range } : null;
+    }).filter(Boolean);
+
+    const rowClasses = ['row'];
+    if (isMonth) rowClasses.push('month');
+    if (isLeap) rowClasses.push('leap');
+    matches.forEach(m => rowClasses.push(m.cat.key));
+    if (isToday) rowClasses.push('today');
+
+    const row = document.createElement('div');
+    row.className = rowClasses.join(' ');
+    if (isToday) row.id = 'todayRow';
+
+    const dateStr = rowDate.toLocaleDateString(T.locale, { day:'2-digit', month:'short', year:'numeric' });
+
+    let badges = '';
+    if (isBirth) badges += `<span class="badge birth">${T.badgeBirth}</span>`;
+    if (isMonth && !isBirth) badges += `<span class="badge month">${T.badgeMonth(mw.months)}</span>`;
+    if (isLeap) badges += `<span class="badge leap">${T.badgeLeap}</span>`;
+    matches.forEach(({ cat, range }) => {
+      badges += `<span class="badge ${cat.key}">${cat.icon} ${cat.badgeLabel(range, lang)}</span>`;
+    });
+    if (isToday) badges += `<span class="badge today">${T.badgeToday}</span>`;
+
+    let notes = '';
+    matches.forEach(({ cat, range }) => {
+      if (cat.alwaysNote || i === range.start) {
+        notes += `<div class="note-line ${cat.key}">${cat.noteText(range, lang)}</div>`;
+      }
+    });
+
+    row.innerHTML = `
+      <div class="row-main">
+        <span class="tick"></span>
+        <span class="weeknum">${T.week} ${i}<small>#${i}</small></span>
+        <span class="date">${dateStr}</span>
+        <span class="age">${T.ageRow(mw.months, mw.weeks)}</span>
+        <span class="badges">${badges}</span>
+      </div>
+      ${notes}
+    `;
+    ruler.appendChild(row);
+  });
+}
+
+function renderAll(scrollToToday){
+  applyStaticStrings();
+  renderLegend();
+  renderRuler();
+  if (scrollToToday) {
+    // wait for fonts + layout to settle so the scroll target doesn't shift under us
+    const go = () => {
+      const todayRow = document.getElementById('todayRow');
+      if (todayRow) todayRow.scrollIntoView({ behavior:'instant', block:'center' });
+    };
+    (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve())
+      .then(() => setTimeout(go, 150));
+  }
+}
+
+/* ================= setup screen ================= */
+const setupEl = document.getElementById('setup');
+const appEl = document.getElementById('app');
+const birthInput = document.getElementById('birthInput');
+const setupErr = document.getElementById('setupErr');
+const setupCancel = document.getElementById('setupCancel');
+
+function fmtYMD(d){
+  const p = n => String(n).padStart(2,'0');
+  return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}`;
+}
+
+function showSetup(){
+  const now = new Date();
+  const min = new Date(now); min.setMonth(min.getMonth() - MAX_MONTHS);
+  birthInput.min = fmtYMD(min);
+  birthInput.max = fmtYMD(now);
+  birthInput.value = config ? config.birthDate : '';
+  setupErr.classList.remove('show');
+  setupCancel.classList.toggle('hidden', !config);
+  applyStaticStrings();
+  appEl.classList.add('hidden');
+  setupEl.classList.remove('hidden');
+}
+
+function showApp(scrollToToday){
+  setupEl.classList.add('hidden');
+  appEl.classList.remove('hidden');
+  renderAll(scrollToToday);
+}
+
+function validateBirth(value){
+  const T = I18N[lang];
+  if (!value) return T.errEmpty;
+  const d = parseBirth(value);
+  const now = new Date();
+  if (d - now > DAY / 2) return T.errFuture;
+  const limit = new Date(now); limit.setMonth(limit.getMonth() - MAX_MONTHS);
+  if (d < new Date(limit.getFullYear(), limit.getMonth(), limit.getDate())) return T.errTooOld;
+  return null;
+}
+
+document.getElementById('setupGo').addEventListener('click', () => {
+  const err = validateBirth(birthInput.value);
+  if (err) {
+    setupErr.textContent = err;
+    setupErr.classList.add('show');
+    return;
+  }
+  config = { birthDate: birthInput.value, lang };
+  saveConfig(config);
+  showApp(true);
+});
+
+setupCancel.addEventListener('click', () => showApp(false));
+
+document.getElementById('changeDate').addEventListener('click', showSetup);
+
+/* language toggles (both in setup + app header) */
+document.querySelectorAll('.lang-toggle button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    if (btn.dataset.lang === lang) return;
+    lang = btn.dataset.lang;
+    if (config) { config.lang = lang; saveConfig(config); }
+    applyStaticStrings();
+    if (!appEl.classList.contains('hidden')) renderAll(false);
+    if (!setupEl.classList.contains('hidden') && birthInput.value) {
+      const err = setupErr.classList.contains('show') ? validateBirth(birthInput.value) : null;
+      if (err) setupErr.textContent = err;
+    }
+  });
+});
+
+/* header shadow deepens on scroll */
+const plaque = document.getElementById('plaque');
+window.addEventListener('scroll', () => {
+  plaque.classList.toggle('scrolled', window.scrollY > 8);
+}, { passive:true });
+
+/* legend open by default on wide screens */
+if (window.matchMedia('(min-width: 720px)').matches) {
+  document.getElementById('legendDetails').open = true;
+}
+
+/* ================= boot ================= */
+if (config) showApp(true);
+else showSetup();
+
+/* ================= service worker ================= */
+if ('serviceWorker' in navigator && (location.protocol === 'https:' || ['localhost','127.0.0.1'].includes(location.hostname))) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch(() => {});
+  });
+}
+</script>
+
+</body>
+</html>

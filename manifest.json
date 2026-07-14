@@ -1,0 +1,31 @@
+{
+  "name": "Weeks & Leaps",
+  "short_name": "Weeks&Leaps",
+  "description": "Baby growth ruler: developmental leaps, growth spurts, teething windows and milestones, week by week from birth to 24 months.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#EFF1E7",
+  "theme_color": "#E5E9DA",
+  "lang": "es",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
