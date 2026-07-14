@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Weeks & Leaps — baby growth ruler, week by week</title>
+<title>Weeks & Leaps · baby growth ruler, week by week</title>
 <meta name="description" content="A week-by-week baby growth ruler from birth to 24 months: developmental leaps, growth spurts, teething windows and milestones. Free, private, works offline. ES/EN.">
 <link rel="canonical" href="https://weeksandleaps.netlify.app/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Weeks & Leaps — baby growth ruler">
+<meta property="og:title" content="Weeks & Leaps · baby growth ruler">
 <meta property="og:description" content="Enter your baby's birth date and get a personal week-by-week ruler of leaps, growth spurts, teething and milestones. No accounts, data never leaves your device.">
 <meta property="og:image" content="https://weeksandleaps.netlify.app/og-image.png">
 <meta property="og:url" content="https://weeksandleaps.netlify.app/">
@@ -333,10 +333,11 @@
   .weeknum small{ display:block; font-weight:400; color:var(--ink-soft); font-size:0.66rem; }
   .date{
     font-family:'IBM Plex Mono',monospace;
-    font-size:0.73rem;
+    font-size:0.72rem;
     color:var(--ink-soft);
-    width:82px;
+    width:118px;
     flex-shrink:0;
+    line-height:1.35;
   }
   .age{
     font-size:0.8rem;
@@ -523,7 +524,7 @@
   @media (max-width:420px){
     .ruler-board{ padding-left:56px; border-radius:14px; }
     .spine{ left:40px; }
-    .date{ width:72px; }
+    .date{ width:104px; }
     .age{ display:none; }  /* age is redundant with weeknum+sub on tiny screens */
     .badges{ justify-content:flex-start; width:100%; padding-left:0; }
     .badge{ white-space:normal; line-height:1.35; }
@@ -614,7 +615,7 @@ const I18N = {
     setupHint:'La línea de tiempo se ajusta a su fecha de nacimiento, semana a semana, desde el nacimiento hasta los 2 años. Todo se guarda solo en este dispositivo.',
     setupBtn:'Crear la regla',
     errEmpty:'Elige una fecha para empezar.',
-    errFuture:'Esa fecha está en el futuro — todavía no ha nacido 🙂',
+    errFuture:'Esa fecha está en el futuro. Todavía no ha nacido 🙂',
     errTooOld:'La regla cubre los primeros 24 meses; esa fecha queda fuera del rango.',
     badgeBirth:'🎉 nacimiento',
     badgeMonth:(m)=>`🎂 ${m} ${m===1?'mes':'meses'}`,
@@ -622,7 +623,7 @@ const I18N = {
     badgeToday:'📍 hoy',
     legendTitle:'¿Qué significa cada icono?',
     legend:[
-      { icon:'🎂', cls:'month', name:'Cumple mensual', desc:'Un mes más de vida — las marcas doradas de la regla.' },
+      { icon:'🎂', cls:'month', name:'Cumple mensual', desc:'Un mes más de vida: las marcas doradas de la regla.' },
       { icon:'🧠', cls:'leap',  name:'Salto de desarrollo', desc:'Salto mental (Wonder Weeks): días más demandantes y, después, habilidades nuevas.' },
       { icon:'🍼', cls:'spurt', name:'Brote de crecimiento', desc:'Pide comer más seguido, duerme más y está más irritable durante unos días.' },
       { icon:'😭', cls:'fussy', name:'Pico de llanto', desc:'El "periodo púrpura": época de más llanto, a veces sin causa clara. Es normal y pasa.' },
@@ -631,7 +632,7 @@ const I18N = {
       { icon:'📍', cls:'today', name:'Hoy', desc:'La semana en la que están ahora mismo.' },
     ],
     aboutTitle:'¿Por qué existe esta página?',
-    aboutBody:'La hice siendo papá primerizo: quería ver de un vistazo, en una sola regla, qué le tocaba a mi bebé cada semana — saltos, brotes, dientes, hitos — sin apps con cuentas ni suscripciones. Espero que a tu familia también le sirva.',
+    aboutBody:'La hice siendo papá primerizo: quería ver de un vistazo, en una sola regla, qué le tocaba a mi bebé cada semana (saltos, brotes, dientes, hitos) sin apps con cuentas ni suscripciones. Espero que a tu familia también le sirva.',
     disclaimerLead:'Aviso:',
     disclaimerBody:'los rangos son promedios generales de referencia, no consejo médico. Cada bebé varía bastante, sobre todo en dentición y en hitos motores. Ante cualquier duda, consulta a tu pediatra.',
     privacyBody:'Privacidad: la fecha de nacimiento se guarda solo en tu dispositivo. No hay cuentas, ni servidores, ni rastreo.',
@@ -650,7 +651,7 @@ const I18N = {
     setupHint:'The timeline adapts to their birth date, week by week, from birth to age 2. Everything is stored on this device only.',
     setupBtn:'Build the ruler',
     errEmpty:'Pick a date to get started.',
-    errFuture:'That date is in the future — they haven’t arrived yet 🙂',
+    errFuture:'That date is in the future. They haven’t arrived yet 🙂',
     errTooOld:'The ruler covers the first 24 months; that date is out of range.',
     badgeBirth:'🎉 birth',
     badgeMonth:(m)=>`🎂 ${m} month${m===1?'':'s'}`,
@@ -658,7 +659,7 @@ const I18N = {
     badgeToday:'📍 today',
     legendTitle:'What does each icon mean?',
     legend:[
-      { icon:'🎂', cls:'month', name:'Monthly birthday', desc:'One more month of life — the gold marks on the ruler.' },
+      { icon:'🎂', cls:'month', name:'Monthly birthday', desc:'One more month of life: the gold marks on the ruler.' },
       { icon:'🧠', cls:'leap',  name:'Developmental leap', desc:'A mental leap (Wonder Weeks): clingier, fussier days followed by brand-new skills.' },
       { icon:'🍼', cls:'spurt', name:'Growth spurt', desc:'Feeds more often, sleeps more, and is fussier for a few days.' },
       { icon:'😭', cls:'fussy', name:'Crying peak', desc:'The "purple period": weeks of extra crying, sometimes with no clear cause. Normal, and it passes.' },
@@ -667,7 +668,7 @@ const I18N = {
       { icon:'📍', cls:'today', name:'Today', desc:'The week you’re in right now.' },
     ],
     aboutTitle:'Why does this page exist?',
-    aboutBody:'I built it as a first-time dad: I wanted one ruler that shows, at a glance, what’s coming for my baby each week — leaps, spurts, teeth, milestones — without account-based apps or subscriptions. I hope it helps your family too.',
+    aboutBody:'I built it as a first-time dad: I wanted one ruler that shows, at a glance, what’s coming for my baby each week (leaps, spurts, teeth, milestones) without account-based apps or subscriptions. I hope it helps your family too.',
     disclaimerLead:'Note:',
     disclaimerBody:'these ranges are general reference averages, not medical advice. Every baby varies a lot, especially with teething and motor milestones. If in doubt, talk to your pediatrician.',
     privacyBody:'Privacy: the birth date is stored on your device only. No accounts, no servers, no tracking.',
@@ -684,8 +685,8 @@ const CATEGORIES = [
     key:'spurt', icon:'🍼', alwaysNote:true,
     badgeLabel:(r,L)=>`${L==='es'?'brote':'spurt'} (${r.label[L]})`,
     noteText:(r,L)=> L==='es'
-      ? `😣 brote de crecimiento (${r.label.es}): más irritable, pide comer más seguido, duerme más — puede durar varios días`
-      : `😣 growth spurt (${r.label.en}): fussier, feeds more often, sleeps more — can last several days`,
+      ? `😣 brote de crecimiento (${r.label.es}): más irritable, pide comer más seguido, duerme más. Puede durar varios días`
+      : `😣 growth spurt (${r.label.en}): fussier, feeds more often, sleeps more. Can last several days`,
     ranges:[
       { label:{es:'7–10 días', en:'7–10 days'},     start:1,  end:1  },
       { label:{es:'2–3 semanas', en:'2–3 weeks'},   start:2,  end:3  },
@@ -699,8 +700,8 @@ const CATEGORIES = [
     key:'fussy', icon:'😭', alwaysNote:true,
     badgeLabel:(r,L)=> L==='es'?'pico de llanto':'crying peak',
     noteText:(r,L)=> L==='es'
-      ? '😭 "periodo púrpura": época de más llanto/cólico, a veces sin causa clara — es normal y suele calmarse hacia las 12–16 semanas'
-      : '😭 the "purple period": extra crying/colic, sometimes with no clear cause — it’s normal and usually eases by weeks 12–16',
+      ? '😭 "periodo púrpura": época de más llanto/cólico, a veces sin causa clara. Es normal y suele calmarse hacia las 12 a 16 semanas'
+      : '😭 the "purple period": extra crying/colic, sometimes with no clear cause. It’s normal and usually eases by weeks 12 to 16',
     ranges:[
       { label:{es:'pico de llanto', en:'crying peak'}, start:2, end:8 },
     ]
@@ -709,8 +710,8 @@ const CATEGORIES = [
     key:'teething', icon:'🦷', alwaysNote:false,
     badgeLabel:(r,L)=>`${L==='es'?'dentición':'teething'} (${r.label[L]})`,
     noteText:(r,L)=> L==='es'
-      ? `🦷 dentición — ${r.label.es}: babeo extra, se lleva las manos/objetos a la boca, encías inflamadas (varía mucho, puede adelantarse o atrasarse meses)`
-      : `🦷 teething — ${r.label.en}: extra drooling, hands/objects in the mouth, sore gums (varies a lot — can run months early or late)`,
+      ? `🦷 dentición, ${r.label.es}: babeo extra, se lleva las manos/objetos a la boca, encías inflamadas (varía mucho, puede adelantarse o atrasarse meses)`
+      : `🦷 teething, ${r.label.en}: extra drooling, hands/objects in the mouth, sore gums (varies a lot, can run months early or late)`,
     ranges:[
       { label:{es:'primeros dientes', en:'first teeth'},           start:20, end:30 },
       { label:{es:'incisivos superiores', en:'upper incisors'},    start:30, end:44 },
@@ -763,6 +764,25 @@ let config = loadConfig();
 let lang = config ? config.lang : defaultLang();
 
 /* ================= helpers ================= */
+/* "10 a 16 jul 2026" (ES) / "Jul 10 to 16, 2026" (EN) — the 7 days this week covers */
+function weekRange(start, lang, locale){
+  const end = new Date(start);
+  end.setDate(end.getDate() + 6);
+  const d1 = start.getDate(), d2 = end.getDate();
+  const m1 = start.toLocaleDateString(locale, { month:'short' });
+  const m2 = end.toLocaleDateString(locale, { month:'short' });
+  const y1 = start.getFullYear(), y2 = end.getFullYear();
+  const sameMonth = start.getMonth() === end.getMonth() && y1 === y2;
+  if (lang === 'es') {
+    if (sameMonth) return `${d1} a ${d2} ${m1} ${y1}`;
+    if (y1 === y2)  return `${d1} ${m1} a ${d2} ${m2} ${y1}`;
+    return `${d1} ${m1} ${y1} a ${d2} ${m2} ${y2}`;
+  }
+  if (sameMonth) return `${m1} ${d1} to ${d2}, ${y1}`;
+  if (y1 === y2)  return `${m1} ${d1} to ${m2} ${d2}, ${y1}`;
+  return `${m1} ${d1}, ${y1} to ${m2} ${d2}, ${y2}`;
+}
+
 function monthsAndWeeks(from, to){
   let months = (to.getFullYear() - from.getFullYear()) * 12 + (to.getMonth() - from.getMonth());
   let anniversary = new Date(from);
@@ -864,7 +884,7 @@ function renderRuler(){
     row.className = rowClasses.join(' ');
     if (isToday) row.id = 'todayRow';
 
-    const dateStr = rowDate.toLocaleDateString(T.locale, { day:'2-digit', month:'short', year:'numeric' });
+    const dateStr = weekRange(rowDate, lang, T.locale);
 
     let badges = '';
     if (isBirth) badges += `<span class="badge birth">${T.badgeBirth}</span>`;
