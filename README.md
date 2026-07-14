@@ -43,10 +43,36 @@ Enter your baby's birth date once and get a personalized "ruler" of their first 
 - **Personalized** — the whole timeline adapts to your baby's birth date.
 - **Bilingual** — full Spanish 🇪🇸 and English 🇬🇧 with a one-tap toggle; auto-detects your browser language on first visit.
 - **Private by design** — the birth date is stored only in your browser's `localStorage`. No accounts, no servers, no analytics, nothing leaves your device.
-- **Installable PWA** — "Add to Home Screen" on iOS and Android for a full-screen, app-like experience.
+- **Installable PWA** — add it to your home screen on iOS and Android for a full-screen, app-like experience ([how to install](#install)).
 - **Works offline** — a service worker caches the app shell and fonts after the first load.
 - **Mobile-first & accessible** — responsive down to ~360px, 44px+ touch targets, honors `prefers-reduced-motion`.
 - **A single HTML file** — no framework, no build step, no dependencies to install.
+
+## <a name="install"></a>📲 Install on your phone
+
+There's no App Store download — you add it straight from the browser, and it lives on your home screen like any other app (full-screen, works offline).
+
+### iPhone / iPad (Safari)
+
+> Add to Home Screen is only available in **Safari** on iOS — not Chrome or Firefox.
+
+1. Open **[weeksandleaps.netlify.app](https://weeksandleaps.netlify.app/)** in Safari.
+2. Tap the **Share** button (the square with an arrow ⬆️ at the bottom of the screen).
+3. Scroll down and tap **Add to Home Screen**.
+4. Tap **Add** in the top-right. The 🍼 icon appears on your home screen.
+
+### Android (Chrome)
+
+1. Open **[weeksandleaps.netlify.app](https://weeksandleaps.netlify.app/)** in Chrome.
+2. Either tap the **Install** banner if it appears, **or** tap the **⋮** menu (top-right).
+3. Choose **Install app** (or **Add to Home screen**).
+4. Confirm **Install**. The 🍼 icon appears in your app drawer / home screen.
+
+### Desktop (Chrome / Edge)
+
+Click the **install icon** (a screen with a down-arrow) in the address bar, or open the **⋮ menu → Install Weeks & Leaps**.
+
+Once installed it launches full-screen with no browser bar, and works with no internet connection after the first open.
 
 ## How it works
 
